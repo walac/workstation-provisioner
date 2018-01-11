@@ -1,0 +1,29 @@
+Host github.com
+	IdentityFile ~/.ssh/github
+
+Host gitlab.com
+	IdentityFile ~/.ssh/gitlab
+
+Host bitbucket.org
+	IdentityFile ~/.ssh/github
+
+Host hg.mozilla.org reviewboard-hg.mozilla.org
+	User wcosta@mozilla.com
+	IdentityFile ~/.ssh/mozilla
+
+Host ssh.mozilla.com rejh?.srv.releng.????.mozilla.com
+	User wcosta
+	IdentityFile ~/.ssh/mozilla
+    ControlMaster auto
+    ControlPath ~/.ssh/ssh-%C
+    ControlPersist 10m
+    ForwardAgent no
+ 
+Host git-internal.mozilla.org
+	User gitolite3
+	IdentityFile ~/.ssh/mozilla
+
+Host *.mozilla.org *.mozilla.com
+	User wcosta
+	IdentityFile ~/.ssh/mozilla
+

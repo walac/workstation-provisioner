@@ -1,0 +1,13 @@
+{
+  "libs": [
+    "ecma6",
+    "browser",
+    "jquery",
+  ],
+  "plugins": {
+    "node": {},
+    "module": {},
+    "es_modules": {},
+    "node_resolve": {},
+  }
+}
