@@ -2,12 +2,12 @@
   "libs": [
     "ecma6",
     "browser",
-    "jquery",
+    "jquery"
   ],
   "plugins": {
     "node": {},
     "module": {},
     "es_modules": {},
-    "node_resolve": {},
+    "node_resolve": {}
   }
 }
