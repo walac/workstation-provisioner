@@ -6,6 +6,7 @@ Steps:
 * vagrant plugin install vagrant-reload
 * vagrant plugin install vagrant-vbguest
 * vagrant plugin install vagrant-faster
+* vagrant plugin install vagrant-disksize
 * Run vagrant up
 * vagrant ssh
 * Run setup-vim.sh
