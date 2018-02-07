@@ -67,6 +67,7 @@ sudo apt-get install -y \
     vim \
     libpython2.7-dev \
     docker.io \
+    language-pack-en \
     xz-utils
 
 _mkdir $HOME/.ssh
@@ -144,12 +145,6 @@ cp $repo_dir/vim/ycm_extra_conf.py $HOME/.ycm_extra_conf.py
 ! test -L ~/.vim || rm -f ~/.vim
 ln -s $HOME/work/vimfiles/vimrc $HOME/.vimrc
 ln -s $HOME/work/vimfiles $HOME/.vim
-
-export LANGUAGE=en_US.UTF-8
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-sudo cp $repo_dir/locales/locale /etc/default
-sudo locale-gen
 
 decrypt $repo_dir/aws/credentials $HOME/.aws/
 
