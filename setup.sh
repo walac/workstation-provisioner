@@ -79,7 +79,11 @@ for i in $HOME/.ssh/*; do
     chmod 600 $i
 done
 
-cp $repo_dir/ssh/config $HOME/.ssh/
+for i in $repo_dir/bin/*; do
+    ln -sf $i -t ~/bin/
+done
+
+ln -sf $repo_dir/ssh/config -t $HOME/.ssh/
 
 for i in $repo_dir/dotfiles/*; do
     dotfile=$(basename ${i%*.enc})
@@ -87,7 +91,7 @@ for i in $repo_dir/dotfiles/*; do
         decrypt ${i%*.enc} $HOME
         mv $HOME/$dotfile $HOME/.$dotfile
     else
-        cp $i $HOME/.$dotfile
+        ln -sf $i $HOME/.$dotfile
     fi
 done
 
@@ -138,13 +142,10 @@ cd $HOME/work
 _rm vimfiles
 git clone git://github.com/walac/vimfiles
 git -C $HOME/work/vimfiles submodule update --init
-cp $repo_dir/vim/setup-vim.sh $HOME/bin
-cp $repo_dir/vim/tern-project $HOME/.tern-project
-cp $repo_dir/vim/ycm_extra_conf.py $HOME/.ycm_extra_conf.py
-! test -L ~/.vimrc || rm -f ~/.vimrc
-! test -L ~/.vim || rm -f ~/.vim
-ln -s $HOME/work/vimfiles/vimrc $HOME/.vimrc
-ln -s $HOME/work/vimfiles $HOME/.vim
+ln -sf $repo_dir/vim/tern-project $HOME/.tern-project
+ln -sf $repo_dir/vim/ycm_extra_conf.py $HOME/.ycm_extra_conf.py
+ln -sf $HOME/work/vimfiles/vimrc $HOME/.vimrc
+ln -sf $HOME/work/vimfiles $HOME/.vim
 
 decrypt $repo_dir/aws/credentials $HOME/.aws/
 

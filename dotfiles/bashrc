@@ -155,3 +155,10 @@ fi
 alias tcsign='taskcluster-cli signin --scope "*"'
 
 export GPG_TTY=$(tty)
+
+export DEBFULLNAME="Wander Lairson Costa"
+export DEBEMAIL="wcosta@mozilla.com"
+
+# mc related
+export HISTCONTROL=ignoreboth
+source_run /usr/lib/mc/mc.sh

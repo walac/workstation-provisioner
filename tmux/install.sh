@@ -17,4 +17,4 @@ make
 sudo make install
 cd -
 rm -rf tmux-${tmux_version}
-cp $DIR/tmux.conf $HOME/.tmux.conf
+ln -sf $DIR/tmux.conf $HOME/.tmux.conf
