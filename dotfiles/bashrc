@@ -138,7 +138,7 @@ export EDITOR=vim
 set -o vi
 
 export GOPATH=$HOME/work/go
-export PATH=usr/local/bin:$PATH:$HOME/bin:$HOME/bin/moz-git-tools:$HOME/bin/git-cinnabar:$GOPATH/bin:/usr/lib/go-1.9/bin
+export PATH=usr/local/bin:$PATH:$HOME/bin:$HOME/bin/moz-git-tools:$HOME/bin/git-cinnabar:$GOPATH/bin:/opt/go/bin
 
 source_run $HOME/.bashrc_secrets
 source_run $HOME/.nvm/nvm.sh
@@ -162,3 +162,4 @@ export DEBEMAIL="wcosta@mozilla.com"
 # mc related
 export HISTCONTROL=ignoreboth
 source_run /usr/lib/mc/mc.sh
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

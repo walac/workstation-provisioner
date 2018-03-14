@@ -7,7 +7,7 @@ $HOME/work/vimfiles/bundle/YouCompleteMe/install.py \
     --tern-completer \
     --system-libclang
 vim -e +GoInstallBinaries +qall
-go get github.com/alecthomas/gometalinter
+go get -u github.com/alecthomas/gometalinter
 gometalinter --install
 
 cd $HOME/work/vimfiles/bundle/tern_for_vim/

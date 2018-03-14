@@ -26,7 +26,6 @@ gitconfig() {
 _mkdir $HOME/work
 _mkdir $HOME/bin
 
-sudo add-apt-repository -y ppa:gophers/archive
 sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt-get install -y \
@@ -46,7 +45,6 @@ sudo apt-get install -y \
     exuberant-ctags \
     git \
     pkg-config \
-    golang-1.9-go \
     git-svn \
     ltrace \
     mercurial \
@@ -69,6 +67,11 @@ sudo apt-get install -y \
     docker.io \
     language-pack-en \
     xz-utils
+
+go_version=1.10
+wget -O /tmp/golang.tar.gz https://dl.google.com/go/go${go_version}.linux-amd64.tar.gz
+sudo rm -rf /opt/go
+sudo tar -xzf /tmp/golang.tar.gz -C /opt
 
 _mkdir $HOME/.ssh
 for i in $repo_dir/ssh/*.enc; do
