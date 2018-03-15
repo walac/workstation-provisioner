@@ -1,5 +1,7 @@
 #!/bin/bash -vex
 
+export DEBIAN_FRONTEND=noninteractive
+
 : repo_dir ${repo_dir:=/vagrant}
 
 _mkdir() {
@@ -26,6 +28,9 @@ gitconfig() {
 _mkdir $HOME/work
 _mkdir $HOME/bin
 
+wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+sudo cp $repo_dir/apt/*.list /etc/apt/sources.list.d/
+
 sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt-get install -y \
@@ -40,7 +45,8 @@ sudo apt-get install -y \
     cmake \
     dpkg-dev \
     flex \
-    libclang-5.0-dev \
+    libclang-6.0-dev \
+    llvm-6.0-dev \
     gdb \
     exuberant-ctags \
     git \
@@ -64,7 +70,6 @@ sudo apt-get install -y \
     unrar \
     vim \
     libpython2.7-dev \
-    docker.io \
     language-pack-en \
     xz-utils
 
@@ -125,7 +130,10 @@ gitconfig http.cookiefile $HOME/.gitcookies
 
 gitconfig gpg.program gpg2
 
-sudo usermod -a -G docker $USER
+if !sudo usermod -a -G docker $USER; then
+    sudo groupadd docker
+    sudo usermod -a -G docker $USER
+fi
 
 cd $HOME/bin
 _rm moz-git-tools
@@ -155,7 +163,7 @@ decrypt $repo_dir/aws/credentials $HOME/.aws/
 decrypt $repo_dir/gnupg/private-gpg.key $HOME
 # If we fail to import, check if it is not because we already imported the key
 if ! gpg --import < $HOME/private-gpg.key; then
-    if ! gpg --import < $HOME/private-gpg.key 2>&1 | grep 'already in secret keyring'; then
+    if ! gpg --import < $HOME/private-gpg.key 2>&1 | egrep '(already in secret keyring)|(not changed)'; then
         exit 1
     fi
 fi
