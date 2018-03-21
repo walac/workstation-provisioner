@@ -158,6 +158,12 @@ ln -sf $repo_dir/vim/ycm_extra_conf.py $HOME/.ycm_extra_conf.py
 ln -sf $HOME/work/vimfiles/vimrc $HOME/.vimrc
 ln -sf $HOME/work/vimfiles $HOME/.vim
 
+export LANGUAGE=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+sudo cp $repo_dir/locales/locale /etc/default
+sudo locale-gen
+
 decrypt $repo_dir/aws/credentials $HOME/.aws/
 
 decrypt $repo_dir/gnupg/private-gpg.key $HOME
