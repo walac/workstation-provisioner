@@ -47,6 +47,8 @@ sudo apt-get install -y \
     flex \
     libclang-6.0-dev \
     llvm-6.0-dev \
+    python3-pip \
+    python-pip \
     gdb \
     exuberant-ctags \
     git \
@@ -139,8 +141,13 @@ cd $HOME/bin
 _rm moz-git-tools
 git clone git://github.com/mozilla/moz-git-tools
 git -C moz-git-tools submodule update --init
+
 _rm git-cinnabar
 git clone git://github.com/glandium/git-cinnabar
+pip2 install requests
+pushd git-cinnabar
+git cinnabar download
+popd
 
 nvm_version=v0.33.8
 curl -o- https://raw.githubusercontent.com/creationix/nvm/$nvm_version/install.sh | bash
