@@ -75,7 +75,7 @@ sudo apt-get install -y \
     language-pack-en \
     xz-utils
 
-go_version=1.10
+go_version=1.10.4
 wget -O /tmp/golang.tar.gz https://dl.google.com/go/go${go_version}.linux-amd64.tar.gz
 sudo rm -rf /opt/go
 sudo tar -xzf /tmp/golang.tar.gz -C /opt
