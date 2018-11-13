@@ -51,6 +51,7 @@ sudo apt-get install -y \
     python-pip \
     gdb \
     exuberant-ctags \
+    jq \
     git \
     pkg-config \
     git-svn \
