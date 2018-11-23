@@ -138,7 +138,7 @@ export EDITOR=vim
 set -o vi
 
 export GOPATH=$HOME/work/go
-export PATH=usr/local/bin:$PATH:$HOME/bin:$HOME/bin/moz-git-tools:$HOME/bin/git-cinnabar:$GOPATH/bin:/opt/go/bin:$HOME/.local/bin/
+export PATH=/usr/local/bin:$HOME/bin:$HOME/bin/moz-git-tools:$HOME/bin/git-cinnabar:$GOPATH/bin:/opt/go/bin:$HOME/.local/bin/:$PATH
 
 source_run $HOME/.bashrc_secrets
 source_run $HOME/.nvm/nvm.sh

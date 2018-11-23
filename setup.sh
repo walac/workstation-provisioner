@@ -76,6 +76,13 @@ sudo apt-get install -y \
     language-pack-en \
     xz-utils
 
+# Add /usr/local/lib to lib path
+sudo ln -sf $repo_dir/etc/00_ld.so.local.conf /etc/ld.so.conf.d/
+sudo ldconfig
+
+$repo_dir/openssl/install.sh
+
+
 go_version=1.10.4
 wget -O /tmp/golang.tar.gz https://dl.google.com/go/go${go_version}.linux-amd64.tar.gz
 sudo rm -rf /opt/go
@@ -147,14 +154,22 @@ _rm git-cinnabar
 git clone git://github.com/glandium/git-cinnabar
 pip2 install requests
 pushd git-cinnabar
-git cinnabar download
+if [ $(uname -p) == "x86_64" ]; then
+    git cinnabar download
+fi
 popd
 
-nvm_version=v0.33.8
+nvm_version=v0.33.11
+if [ $(uname -p) == "x86_64" ]; then
+    node_version=node
+else
+    # last node version that provides 32 bits binaries
+    node_version=v9.11.2
+fi
 curl -o- https://raw.githubusercontent.com/creationix/nvm/$nvm_version/install.sh | bash
 source $HOME/.nvm/nvm.sh
-nvm install node
-nvm use node
+nvm install $node_version
+nvm use $node_version
 npm install -g yarn eslint_d
 
 cd $HOME/work
