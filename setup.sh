@@ -28,9 +28,6 @@ gitconfig() {
 _mkdir $HOME/work
 _mkdir $HOME/bin
 
-wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
-sudo cp $repo_dir/apt/*.list /etc/apt/sources.list.d/
-
 sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt-get install -y \
@@ -45,8 +42,8 @@ sudo apt-get install -y \
     cmake \
     dpkg-dev \
     flex \
-    libclang-6.0-dev \
-    llvm-6.0-dev \
+    libclang-dev \
+    llvm-dev \
     python3-pip \
     python-pip \
     gdb \
