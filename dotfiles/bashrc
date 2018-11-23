@@ -2,6 +2,12 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+if [ $(uname -p) == "x86_64" ]; then
+    export WORK=/work
+else
+    export WORK=$HOME/work
+fi
+
 brew_prefix=""
 if which brew; then
     brew_prefix=$(brew --prefix)
@@ -137,7 +143,7 @@ fi
 export EDITOR=vim
 set -o vi
 
-export GOPATH=$HOME/work/go
+export GOPATH=$WORK/go
 export PATH=/usr/local/bin:$HOME/bin:$HOME/bin/moz-git-tools:$HOME/bin/git-cinnabar:$GOPATH/bin:/opt/go/bin:$HOME/.local/bin/:$PATH
 
 source_run $HOME/.bashrc_secrets

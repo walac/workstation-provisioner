@@ -2,6 +2,16 @@
 
 export DEBIAN_FRONTEND=noninteractive
 
+if [ $(uname -p) == "x86_64" ]; then
+    export WORK=/work
+    if ! [ -d $WORK ]; then
+        echo "$WORK not mounted" >&2
+        exit 1
+    fi
+else
+    export WORK=$HOME/work
+fi
+
 : repo_dir ${repo_dir:=/vagrant}
 
 _mkdir() {
@@ -25,7 +35,7 @@ gitconfig() {
     git config --global "$1" "$2"
 }
 
-_mkdir $HOME/work
+_mkdir $WORK
 _mkdir $HOME/bin
 
 sudo apt-get update
@@ -169,14 +179,14 @@ nvm install $node_version
 nvm use $node_version
 npm install -g yarn eslint_d
 
-cd $HOME/work
+cd $WORK
 _rm vimfiles
 git clone git://github.com/walac/vimfiles
-git -C $HOME/work/vimfiles submodule update --init
+git -C $WORK/vimfiles submodule update --init
 ln -sf $repo_dir/vim/tern-project $HOME/.tern-project
 ln -sf $repo_dir/vim/ycm_extra_conf.py $HOME/.ycm_extra_conf.py
-ln -sf $HOME/work/vimfiles/vimrc $HOME/.vimrc
-ln -sf $HOME/work/vimfiles $HOME/.vim
+ln -sf $WORK/vimfiles/vimrc $HOME/.vimrc
+ln -sf $WORK/vimfiles $HOME/.vim
 
 export LANGUAGE=en_US.UTF-8
 export LANG=en_US.UTF-8

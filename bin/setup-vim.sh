@@ -1,11 +1,13 @@
 #!/bin/bash -ve
 
+: WORK=${WORK=$HOME/work}
+
 go get -u github.com/mdempsky/gocode
 go get -u github.com/alecthomas/gometalinter
 
 vim -e +BundleInstall +qall || :
 
-$HOME/work/vimfiles/bundle/YouCompleteMe/install.py \
+$WORK/vimfiles/bundle/YouCompleteMe/install.py \
     --clang-completer \
     --tern-completer \
     --system-libclang
@@ -13,6 +15,6 @@ $HOME/work/vimfiles/bundle/YouCompleteMe/install.py \
 vim -e +GoInstallBinaries +qall
 gometalinter --install
 
-cd $HOME/work/vimfiles/bundle/tern_for_vim/
+cd $WORK/vimfiles/bundle/tern_for_vim/
 npm install
 cd -
