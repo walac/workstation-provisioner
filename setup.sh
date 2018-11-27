@@ -198,8 +198,8 @@ decrypt $repo_dir/aws/credentials $HOME/.aws/
 
 decrypt $repo_dir/gnupg/private-gpg.key $HOME
 # If we fail to import, check if it is not because we already imported the key
-if ! gpg --import < $HOME/private-gpg.key; then
-    if ! gpg --import < $HOME/private-gpg.key 2>&1 | egrep '(already in secret keyring)|(not changed)'; then
+if ! gpg --import --batch < $HOME/private-gpg.key; then
+    if ! gpg --import --batch < $HOME/private-gpg.key 2>&1 | egrep '(already in secret keyring)|(not changed)'; then
         exit 1
     fi
 fi
