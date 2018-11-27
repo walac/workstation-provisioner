@@ -147,7 +147,7 @@ gitconfig http.cookiefile $HOME/.gitcookies
 
 gitconfig gpg.program gpg2
 
-if !sudo usermod -a -G docker $USER; then
+if ! sudo usermod -a -G docker $USER; then
     sudo groupadd docker
     sudo usermod -a -G docker $USER
 fi
