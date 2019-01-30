@@ -2,14 +2,16 @@
 
 export DEBIAN_FRONTEND=noninteractive
 
-if [ $(uname -p) == "x86_64" ]; then
-    export WORK=/work
-    if ! [ -d $WORK ]; then
-        echo "$WORK not mounted" >&2
-        exit 1
+if [ "$WORK" == "" ]; then
+    if [ $(uname -p) == "x86_64" ]; then
+        export WORK=/work
+        if ! [ -d $WORK ]; then
+            echo "$WORK not mounted" >&2
+            exit 1
+        fi
+    else
+        export WORK=$HOME/work
     fi
-else
-    export WORK=$HOME/work
 fi
 
 : repo_dir ${repo_dir:=/vagrant}
