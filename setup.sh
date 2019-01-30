@@ -141,8 +141,8 @@ gitconfig fetch.fsckobject true
 gitconfig receive.fsckobject true
 gitconfig mozreview.nickname wcosta
 
-gitconfig "url.git@github.com.pushInsteadOf" https://github.com/
-gitconfig "url.git@github.com.pushInsteadOf" git://github.com/
+gitconfig "url.git@github.com:.pushInsteadOf" https://github.com/
+gitconfig "url.git@github.com:.pushInsteadOf" git://github.com/
 
 gitconfig http.sslVerify true
 gitconfig http.cookiefile $HOME/.gitcookies
