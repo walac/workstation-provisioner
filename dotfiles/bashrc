@@ -2,12 +2,6 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-if [ $(uname -p) == "x86_64" ]; then
-    export WORK=/work
-else
-    export WORK=$HOME/work
-fi
-
 brew_prefix=""
 if which brew; then
     brew_prefix=$(brew --prefix)
@@ -18,6 +12,8 @@ source_run() {
         . $1
     fi
 }
+
+source $HOME/.bash_work
 
 source_run /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash
 source_run /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
@@ -145,6 +141,7 @@ set -o vi
 
 export GOPATH=$WORK/go
 export PATH=/usr/local/bin:$HOME/bin:$HOME/bin/moz-git-tools:$HOME/bin/git-cinnabar:$GOPATH/bin:/opt/go/bin:$HOME/.local/bin/:$PATH
+export PATH=$PATH:$HOME/.cargo/bin
 
 source_run $HOME/.bashrc_secrets
 source_run $HOME/.nvm/nvm.sh
@@ -169,3 +166,11 @@ export DEBEMAIL="wcosta@mozilla.com"
 export HISTCONTROL=ignoreboth
 source_run /usr/lib/mc/mc.sh
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/walac/Downloads/google-cloud-sdk/path.bash.inc' ]; then . '/home/walac/Downloads/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/walac/Downloads/google-cloud-sdk/completion.bash.inc' ]; then . '/home/walac/Downloads/google-cloud-sdk/completion.bash.inc'; fi
+
+[[ -s "/home/vagrant/.gvm/scripts/gvm" ]] && source "/home/vagrant/.gvm/scripts/gvm"

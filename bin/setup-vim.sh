@@ -9,7 +9,11 @@ vim -e +BundleInstall +qall || :
 
 $WORK/vimfiles/bundle/YouCompleteMe/install.py \
     --clang-completer \
-    --tern-completer
+    --clangd-completer \
+    --tern-completer \
+    --ts-completer \
+    --go-completer \
+    --rust-completer
 
 vim -e +GoInstallBinaries +qall
 gometalinter --install

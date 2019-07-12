@@ -1,19 +1,5 @@
 #!/bin/bash -vex
 
-export DEBIAN_FRONTEND=noninteractive
-
-if [ "$WORK" == "" ]; then
-    if [ $(uname -p) == "x86_64" ]; then
-        export WORK=/work
-        if ! [ -d $WORK ]; then
-            echo "$WORK not mounted" >&2
-            exit 1
-        fi
-    else
-        export WORK=$HOME/work
-    fi
-fi
-
 : repo_dir ${repo_dir:=/vagrant}
 
 _mkdir() {
@@ -28,6 +14,15 @@ _rm() {
     fi
 }
 
+if [ "$WORK" == "" ]; then
+    if [ -d /work ]; then
+        export WORK=/work
+    else
+        export WORK=$HOME/work
+        _mkdir $WORK
+    fi
+fi
+
 decrypt() {
     _mkdir $2
     openssl enc -d -aes-256-cbc -in $1.enc -out $2/$(basename $1) -kfile $repo_dir/passphrase.txt
@@ -41,8 +36,8 @@ _mkdir $WORK
 _mkdir $HOME/bin
 
 sudo apt-get update
-sudo apt-get upgrade -y
-sudo apt-get install -y \
+sudo DEBIAN_FRONTEND=noninteractive apt-get upgrade -yq
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq \
     autoconf \
     autoconf2.13 \
     automake \
@@ -91,11 +86,9 @@ sudo ldconfig
 
 $repo_dir/openssl/install.sh
 
-
-go_version=1.10.4
-wget -O /tmp/golang.tar.gz https://dl.google.com/go/go${go_version}.linux-amd64.tar.gz
-sudo rm -rf /opt/go
-sudo tar -xzf /tmp/golang.tar.gz -C /opt
+# Install go-gvm
+_rm $HOME/.gvm
+bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
 
 _mkdir $HOME/.ssh
 for i in $repo_dir/ssh/*.enc; do
@@ -121,6 +114,9 @@ for i in $repo_dir/dotfiles/*; do
         ln -sf $i $HOME/.$dotfile
     fi
 done
+
+echo "export WORK=$WORK" > $HOME/.bash_work
+chmod +x $HOME/.bash_work
 
 bugzilla_apikey=$(cat $HOME/.bashrc_secrets \
     | grep BUGZILLA_APIKEY \
@@ -164,7 +160,7 @@ git clone git://github.com/glandium/git-cinnabar
 pip2 install requests
 pushd git-cinnabar
 if [ $(uname -p) == "x86_64" ]; then
-    git cinnabar download
+    PATH=$PATH:$HOME/bin/git-cinnabar git cinnabar download
 fi
 popd
 
@@ -220,5 +216,5 @@ $repo_dir/tmux/install.sh
 gitconfig commit.gpgSign true
 gitconfig user.signingkey $signingkey
 
-sudo apt-get autoremove
+sudo apt-get -yq autoremove
 #sudo dpkg-reconfigure --priority=low unattended-upgrades
