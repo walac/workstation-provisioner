@@ -12,7 +12,8 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.disksize.size = '50GB'
+  config.disksize.size = '150GB'
+  config.vm.box = "bento/ubuntu-19.04"
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
@@ -49,12 +50,10 @@ Vagrant.configure("2") do |config|
     # Customize the amount of memory on the VM:
     vb.memory = "2048"
     vb.customize ["modifyvm", :id, "--vram", "128"]
-    config.vm.box = "ubuntu/bionic64"
   end
 
   config.vm.provider "parallels" do |prl|
     prl.update_guest_tools = true
-    config.vm.box = "generic/ubuntu1804"
   end
 
   # Enable provisioning with a shell script. Additional provisioners such as
