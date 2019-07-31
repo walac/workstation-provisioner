@@ -80,6 +80,12 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq \
     language-pack-en \
     xz-utils
 
+# Set timezone and date/time
+sudo timedatectl set-timezone America/Sao_Paulo
+sudo timedatectl set-ntp yes
+sudo systemctl enable systemd-timesyncd.service
+sudo systemctl start systemd-timesyncd.service
+
 # Add /usr/local/lib to lib path
 sudo ln -sf $repo_dir/etc/00_ld.so.local.conf /etc/ld.so.conf.d/
 sudo ldconfig
