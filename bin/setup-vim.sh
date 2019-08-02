@@ -2,9 +2,6 @@
 
 : WORK=${WORK=$HOME/work}
 
-go get -u github.com/mdempsky/gocode
-go get -u github.com/alecthomas/gometalinter
-
 vim -e +BundleInstall +qall || :
 
 $WORK/vimfiles/bundle/YouCompleteMe/install.py \
@@ -12,11 +9,7 @@ $WORK/vimfiles/bundle/YouCompleteMe/install.py \
     --clangd-completer \
     --tern-completer \
     --ts-completer \
-    --go-completer \
     --rust-completer
-
-vim -e +GoInstallBinaries +qall
-gometalinter --install
 
 cd $WORK/vimfiles/bundle/tern_for_vim/
 npm install
