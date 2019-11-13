@@ -13,7 +13,7 @@ Vagrant.configure("2") do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
   config.disksize.size = '150GB'
-  config.vm.box = "bento/ubuntu-19.04"
+  config.vm.box = "bento/ubuntu-19.10"
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
@@ -54,6 +54,11 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider "parallels" do |prl|
     prl.update_guest_tools = true
+  end
+
+  config.vm.provider "wmware_desktop" do |v|
+    v.vmx["memsize"] = "4096"
+    v.vmx["numvcpus"] = "4"
   end
 
   # Enable provisioning with a shell script. Additional provisioners such as

@@ -63,7 +63,6 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq \
     mercurial \
     yasm \
     bash-completion \
-    bcrypt \
     binutils \
     build-essential \
     dkms \
