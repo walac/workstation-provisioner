@@ -128,7 +128,7 @@ bugzilla_apikey=$(cat $HOME/.bashrc_secrets \
     | awk -F= '{print $2}'
 )
 
-gitconfig user.email wcosta@mozilla.com
+gitconfig user.email wander.lairson@gmail.com
 gitconfig user.name 'Wander Lairson Costa'
 gitconfig color.ui auto
 
