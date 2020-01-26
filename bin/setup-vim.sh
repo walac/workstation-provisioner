@@ -9,6 +9,7 @@ $WORK/vimfiles/bundle/YouCompleteMe/install.py \
     --clangd-completer \
     --tern-completer \
     --ts-completer \
+    --go-completer \
     --rust-completer
 
 cd $WORK/vimfiles/bundle/tern_for_vim/
