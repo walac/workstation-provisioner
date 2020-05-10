@@ -52,7 +52,6 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq \
     libclang-dev \
     llvm-dev \
     python3-pip \
-    python-pip \
     gdb \
     exuberant-ctags \
     jq \
@@ -75,7 +74,8 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq \
     ssl-cert \
     unrar \
     vim \
-    libpython2.7-dev \
+    libpython3-dev \
+    libpython2-dev \
     language-pack-en \
     xz-utils
 
@@ -162,7 +162,7 @@ git -C moz-git-tools submodule update --init
 
 _rm git-cinnabar
 git clone git://github.com/glandium/git-cinnabar
-pip2 install requests
+pip3 install requests
 pushd git-cinnabar
 if [ $(uname -p) == "x86_64" ]; then
     PATH=$PATH:$HOME/bin/git-cinnabar git cinnabar download
@@ -210,7 +210,7 @@ rm -f $HOME/private-gpg.key
 cp $repo_dir/gnupg/public-gpg.key ~/.gnupg
 gpg --import-ownertrust < $repo_dir/gnupg/ownertrust.txt
 
-signingkey=$(gpg --list-secret-keys --keyid-format LONG wcosta@mozilla.com \
+signingkey=$(gpg --list-secret-keys --keyid-format LONG wander.lairson@gmail.com \
     | grep sec \
     | awk '{print $2}' \
     | awk -F/ '{print $2}'

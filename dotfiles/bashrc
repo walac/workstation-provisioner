@@ -173,6 +173,4 @@ if [ -f '/home/walac/Downloads/google-cloud-sdk/path.bash.inc' ]; then . '/home/
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/walac/Downloads/google-cloud-sdk/completion.bash.inc' ]; then . '/home/walac/Downloads/google-cloud-sdk/completion.bash.inc'; fi
 
-[[ -s "/home/vagrant/.gvm/scripts/gvm" ]] && source "/home/vagrant/.gvm/scripts/gvm"
-
 source_run .bashrc.local
