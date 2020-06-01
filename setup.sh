@@ -51,6 +51,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq \
     flex \
     libclang-dev \
     llvm-dev \
+    python2 \
     python3-pip \
     gdb \
     exuberant-ctags \
