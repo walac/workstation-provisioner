@@ -59,7 +59,6 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq \
     pkg-config \
     git-svn \
     ltrace \
-    mercurial \
     yasm \
     bash-completion \
     binutils \
@@ -123,18 +122,9 @@ done
 echo "export WORK=$WORK" > $HOME/.bash_work
 chmod +x $HOME/.bash_work
 
-bugzilla_apikey=$(cat $HOME/.bashrc_secrets \
-    | grep BUGZILLA_APIKEY \
-    | awk -F= '{print $2}'
-)
-
 gitconfig user.email wander.lairson@gmail.com
 gitconfig user.name 'Wander Lairson Costa'
 gitconfig color.ui auto
-
-gitconfig bz.browser firefox3
-gitconfig bz.apikey $bugzilla_apikey
-gitconfig bz.username wcosta@mozilla.com
 
 gitconfig merge.conflictstyle diff3
 gitconfig transfer.fsckobject true
