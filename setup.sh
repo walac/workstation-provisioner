@@ -167,7 +167,7 @@ if [ $(uname -p) == "x86_64" ]; then
 fi
 popd
 
-nvm_version=v0.33.11
+nvm_version=v0.35.3
 if [ $(uname -p) == "x86_64" ]; then
     node_version=node
 else
