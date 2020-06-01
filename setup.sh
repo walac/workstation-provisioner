@@ -195,8 +195,6 @@ export LC_ALL=en_US.UTF-8
 sudo cp $repo_dir/locales/locale /etc/default
 sudo locale-gen
 
-decrypt $repo_dir/aws/credentials $HOME/.aws/
-
 decrypt $repo_dir/gnupg/private-gpg.key $HOME
 # If we fail to import, check if it is not because we already imported the key
 if ! gpg --import --batch < $HOME/private-gpg.key; then
