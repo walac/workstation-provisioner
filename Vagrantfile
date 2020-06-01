@@ -13,7 +13,7 @@ Vagrant.configure("2") do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
   config.disksize.size = '150GB'
-  config.vm.box = "bento/ubuntu-19.10"
+  config.vm.box = "bento/ubuntu-20.04"
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
