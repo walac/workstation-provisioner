@@ -13,6 +13,7 @@ vim -e +"CocInstall \
     coc-yaml \
     coc-clangd \
     coc-tsserver \
+    coc-go \
     "
 
 $WORK/vimfiles/bundle/YouCompleteMe/install.py --go-completer
