@@ -139,8 +139,7 @@ fi
 export EDITOR=vim
 set -o vi
 
-export GOPATH=$WORK/go
-export PATH=/usr/local/bin:$HOME/bin:$HOME/bin/moz-git-tools:$HOME/bin/git-cinnabar:$GOPATH/bin:/opt/go/bin:$HOME/.local/bin/:$PATH
+export PATH=/usr/local/bin:$HOME/bin:$HOME/bin/git-cinnabar:$HOME/.local/bin/:$PATH
 export PATH=$PATH:$HOME/.cargo/bin
 
 source_run $HOME/.bashrc_secrets
@@ -174,3 +173,7 @@ if [ -f '/home/walac/Downloads/google-cloud-sdk/path.bash.inc' ]; then . '/home/
 if [ -f '/home/walac/Downloads/google-cloud-sdk/completion.bash.inc' ]; then . '/home/walac/Downloads/google-cloud-sdk/completion.bash.inc'; fi
 
 source_run .bashrc.local
+
+source_run $HOME/.cargo/env
+
+source_run $HOME/.gvm/scripts/gvm

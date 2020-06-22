@@ -35,23 +35,19 @@ gitconfig() {
 _mkdir $WORK
 _mkdir $HOME/bin
 
-sudo apt-get update
-sudo DEBIAN_FRONTEND=noninteractive apt-get upgrade -yq
-sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq \
+sudo apt update
+sudo DEBIAN_FRONTEND=noninteractive apt upgrade -yq
+sudo DEBIAN_FRONTEND=noninteractive apt install -yq \
     autoconf \
     autoconf2.13 \
     automake \
     autotools-dev \
-    awscli \
     bison \
     ccache \
     cgdb \
     cmake \
     dpkg-dev \
     flex \
-    libclang-dev \
-    llvm-dev \
-    python2 \
     python3-pip \
     gdb \
     exuberant-ctags \
@@ -69,24 +65,26 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq \
     gnupg2 \
     gnupg-agent \
     htop \
-    libusb-0.1-4 \
-    libusb-1.0-0-dev \
     ssl-cert \
     unrar \
     vim \
-    libpython3-dev \
-    libpython2-dev \
     language-pack-en \
+    python2.7 \
     xz-utils
 
 # Set timezone and date/time
-sudo timedatectl set-timezone America/Sao_Paulo
-sudo timedatectl set-ntp yes
-sudo systemctl enable systemd-timesyncd.service
-sudo systemctl start systemd-timesyncd.service
+if which timedatactl; then
+    sudo timedatectl set-timezone America/Sao_Paulo || :
+    sudo timedatectl set-ntp yes || :
+fi
+
+if which systemctl; then
+    sudo systemctl enable systemd-timesyncd.service || :
+    sudo systemctl start systemd-timesyncd.service || :
+fi
 
 # Add /usr/local/lib to lib path
-sudo ln -sf $repo_dir/etc/00_ld.so.local.conf /etc/ld.so.conf.d/
+sudo cp -f $repo_dir/etc/00_ld.so.local.conf /etc/ld.so.conf.d/
 sudo ldconfig
 
 $repo_dir/openssl/install.sh
@@ -105,10 +103,10 @@ for i in $HOME/.ssh/*; do
 done
 
 for i in $repo_dir/bin/*; do
-    ln -sf $i -t ~/bin/
+    cp -f $i -t ~/bin/
 done
 
-ln -sf $repo_dir/ssh/config -t $HOME/.ssh/
+cp -f $repo_dir/ssh/config -t $HOME/.ssh/
 
 for i in $repo_dir/dotfiles/*; do
     dotfile=$(basename ${i%*.enc})
@@ -116,7 +114,7 @@ for i in $repo_dir/dotfiles/*; do
         decrypt ${i%*.enc} $HOME
         mv $HOME/$dotfile $HOME/.$dotfile
     else
-        ln -sf $i $HOME/.$dotfile
+        cp -f $i $HOME/.$dotfile
     fi
 done
 
@@ -131,7 +129,6 @@ gitconfig merge.conflictstyle diff3
 gitconfig transfer.fsckobject true
 gitconfig fetch.fsckobject true
 gitconfig receive.fsckobject true
-gitconfig mozreview.nickname wcosta
 
 gitconfig "url.git@github.com:.pushInsteadOf" https://github.com/
 gitconfig "url.git@github.com:.pushInsteadOf" git://github.com/
@@ -145,9 +142,6 @@ if ! sudo usermod -a -G docker $USER; then
 fi
 
 cd $HOME/bin
-_rm moz-git-tools
-git clone git://github.com/mozilla/moz-git-tools
-git -C moz-git-tools submodule update --init
 
 _rm git-cinnabar
 git clone git://github.com/glandium/git-cinnabar
@@ -175,8 +169,7 @@ cd $WORK
 _rm vimfiles
 git clone git://github.com/walac/vimfiles
 git -C $WORK/vimfiles submodule update --init
-ln -sf $repo_dir/vim/tern-project $HOME/.tern-project
-ln -sf $repo_dir/vim/ycm_extra_conf.py $HOME/.ycm_extra_conf.py
+cp -f $repo_dir/vim/tern-project $HOME/.tern-project
 ln -sf $WORK/vimfiles/vimrc $HOME/.vimrc
 ln -sf $WORK/vimfiles $HOME/.vim
 
@@ -208,5 +201,5 @@ $repo_dir/tmux/install.sh
 gitconfig commit.gpgSign true
 gitconfig user.signingkey $signingkey
 
-sudo apt-get -yq autoremove
+sudo apt -yq autoremove
 #sudo dpkg-reconfigure --priority=low unattended-upgrades
