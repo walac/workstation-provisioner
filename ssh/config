@@ -6,21 +6,3 @@ Host gitlab.com
 
 Host bitbucket.org
     IdentityFile ~/.ssh/github
-
-Host hg.mozilla.org reviewboard-hg.mozilla.org
-    User wcosta@mozilla.com
-    IdentityFile ~/.ssh/mozilla
-
-Host ssh.mozilla.com
-    ForwardAgent yes
-    User wcosta
-
-Host git-internal.mozilla.org
-    User gitolite3
-    IdentityFile ~/.ssh/mozilla
-    ProxyCommand ssh -W %h:%p -oProxyCommand=none ssh.mozilla.com
-
-Host *.mozilla.org *.mozilla.com
-    User wcosta
-    IdentityFile ~/.ssh/mozilla
-
