@@ -6,3 +6,9 @@ Host gitlab.com
 
 Host bitbucket.org
     IdentityFile ~/.ssh/github
+
+Host tizen review.tizen.org
+	Hostname review.tizen.org
+	IdentityFile ~/.ssh/github
+	User walac
+	Port 29418
