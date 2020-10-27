@@ -38,6 +38,7 @@ _mkdir $HOME/bin
 sudo apt update
 sudo DEBIAN_FRONTEND=noninteractive apt upgrade -yq
 sudo DEBIAN_FRONTEND=noninteractive apt install -yq \
+    curl \
     autoconf \
     autoconf2.13 \
     automake \

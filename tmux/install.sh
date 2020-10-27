@@ -18,7 +18,7 @@ if (($(echo $tmux_version | tr -d .) > $(echo $apt_version | tr -d .))); then
     cd -
     rm -rf tmux-${tmux_version}
 else
-    sudo apt-get install tmux
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq tmux
 fi
 
 ln -sf $DIR/tmux.conf $HOME/.tmux.conf
