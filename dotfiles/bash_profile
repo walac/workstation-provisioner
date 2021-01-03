@@ -22,6 +22,7 @@ source_run $brew_prefix/etc/bash_completion.d/git-prompt
 source_run /usr/local/Cellar/docker/17.12.0/etc/bash_completion.d/docker
 source_run $brew_prefix/etc/bash_completion
 source_run $brew_prefix/etc/bash_completion.d/password-store
+source_run /usr/share/git-core/contrib/completion/git-prompt.sh
 
 # If not running interactively, don't do anything
  case $- in

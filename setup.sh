@@ -35,23 +35,17 @@ gitconfig() {
 _mkdir $WORK
 _mkdir $HOME/bin
 
-sudo apt update
-sudo DEBIAN_FRONTEND=noninteractive apt upgrade -yq
-sudo DEBIAN_FRONTEND=noninteractive apt install -yq \
+common_packages="\
     curl \
     autoconf \
-    autoconf2.13 \
     automake \
-    autotools-dev \
     bison \
     ccache \
     cgdb \
     cmake \
-    dpkg-dev \
     flex \
     python3-pip \
     gdb \
-    exuberant-ctags \
     jq \
     git \
     pkg-config \
@@ -60,18 +54,35 @@ sudo DEBIAN_FRONTEND=noninteractive apt install -yq \
     yasm \
     bash-completion \
     binutils \
-    build-essential \
     dkms \
     dnsutils \
     gnupg2 \
-    gnupg-agent \
     htop \
-    ssl-cert \
-    unrar \
     vim \
-    language-pack-en \
+    tmux \
     python2.7 \
-    xz-utils
+    "
+
+if which apt; then
+    sudo apt update
+    sudo DEBIAN_FRONTEND=noninteractive apt upgrade -yq
+    sudo DEBIAN_FRONTEND=noninteractive apt install -yq $common_packages \
+        autoconf2.13 \
+        autotools-dev \
+        build-essential \
+        gnupg-agent \
+        ssl-cert \
+        unrar \
+        dpkg-dev \
+        language-pack-en \
+        xz-utils
+elif which dnf; then
+    sudo dnf -yq up
+    sudo dnf -yq install $common_packages \
+        gcc \
+        gcc-c++ \
+        openssl
+fi
 
 # Set timezone and date/time
 if which timedatactl; then
@@ -178,7 +189,12 @@ export LANGUAGE=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 sudo cp $repo_dir/locales/locale /etc/default
-sudo locale-gen
+
+if which locale-gen; then
+    sudo locale-gen
+elif which localectl; then
+    localectl set-locale LANG=$LANG
+fi
 
 decrypt $repo_dir/gnupg/private-gpg.key $HOME
 # If we fail to import, check if it is not because we already imported the key
@@ -197,10 +213,12 @@ signingkey=$(gpg --list-secret-keys --keyid-format LONG wander.lairson@gmail.com
     | awk -F/ '{print $2}'
 )
 
-$repo_dir/tmux/install.sh
-
 gitconfig commit.gpgSign true
 gitconfig user.signingkey $signingkey
 
-sudo apt -yq autoremove
+if which apt; then
+    sudo apt -yq autoremove
+elif which dnf; then
+    sudo dnf -yq autoremove
+fi
 #sudo dpkg-reconfigure --priority=low unattended-upgrades
