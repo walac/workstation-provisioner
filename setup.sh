@@ -10,7 +10,7 @@ _mkdir() {
 
 _rm() {
     if test -e $1; then
-        rm -rf $1
+        sudo rm -rf $1
     fi
 }
 
