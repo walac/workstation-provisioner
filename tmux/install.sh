@@ -21,4 +21,4 @@ else
     sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq tmux
 fi
 
-ln -sf $DIR/tmux.conf $HOME/.tmux.conf
+cp $DIR/tmux.conf $HOME/.tmux.conf
