@@ -51,16 +51,14 @@ common_packages="\
     pkg-config \
     git-svn \
     ltrace \
-    yasm \
     bash-completion \
     binutils \
     dkms \
-    dnsutils \
     gnupg2 \
     htop \
     vim \
     tmux \
-    python2.7 \
+    python2 \
     "
 
 if which apt; then
@@ -75,6 +73,8 @@ if which apt; then
         unrar \
         dpkg-dev \
         language-pack-en \
+        yasm \
+        dnsutils \
         xz-utils
 elif which dnf; then
     sudo dnf -yq up

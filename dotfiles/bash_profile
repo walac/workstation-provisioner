@@ -3,7 +3,7 @@
 # for examples
 
 brew_prefix=""
-if which brew; then
+if which brew > /dev/null 2>&1; then
     brew_prefix=$(brew --prefix)
 fi
 
@@ -146,7 +146,7 @@ export PATH=$PATH:$HOME/.cargo/bin
 source_run $HOME/.bashrc_secrets
 source_run $HOME/.nvm/nvm.sh
 
-if which brew; then
+if which brew > /dev/null 2>&1; then
     source_run `brew --prefix nvm`/nvm.sh
 fi
 
