@@ -142,7 +142,7 @@ gitconfig transfer.fsckobject true
 gitconfig fetch.fsckobject true
 gitconfig receive.fsckobject true
 gitconfig core.editor vim
-gitconfig format.signoff true
+gitconfig format.signOff true
 
 gitconfig "url.git@github.com:.pushInsteadOf" https://github.com/
 gitconfig "url.git@github.com:.pushInsteadOf" git://github.com/
