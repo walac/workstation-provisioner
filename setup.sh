@@ -216,6 +216,7 @@ signingkey=$(gpg --list-secret-keys --keyid-format LONG wander.lairson@gmail.com
 )
 
 gitconfig commit.gpgSign true
+gitconfig tag.gpgSign true
 gitconfig user.signingkey $signingkey
 
 if which apt; then
